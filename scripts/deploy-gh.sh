@@ -15,6 +15,7 @@ cd docs/.vuepress/dist
 git init
 git add -A
 git commit -m 'deploy'
+git branch -M main
 
 # 如果发布到 https://<USERNAME>.github.io
 git push -f git@github.com:koala91/koala91.github.io.git main
