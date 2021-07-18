@@ -6,7 +6,6 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "deploy-gh": "GH=1 yarn docs:build && bash scripts/deploy-gh.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
