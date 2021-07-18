@@ -1,8 +1,0 @@
-.DS_Store
-yarn.lock
-node_modules
-docs/.vuepress/dist
-
-# Editor directories and files
-.idea
-.vscode
