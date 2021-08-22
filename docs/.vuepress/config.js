@@ -1,5 +1,5 @@
 module.exports = {
-  title: "My Blog",
+  title: "学习记录",
   description: "This is a blog.",
   themeConfig: {
     logo: "/assets/logo.jpg",
