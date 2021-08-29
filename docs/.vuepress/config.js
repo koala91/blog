@@ -14,6 +14,7 @@ module.exports = {
           "/React/表单",
           "/React/路由",
           "/React/生命周期",
+          "/React/Redux",
         ],
       },
     ],
