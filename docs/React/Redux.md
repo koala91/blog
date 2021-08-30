@@ -203,12 +203,128 @@ store.dispatch({ type: "description ..." });
 
 ## Redux 中间件
 
-3
+中间件允许我们扩展 `redux` 应用程序
+
+### 加⼊了中间件 `Redux` ⼯作流程
+
+![中间件Redux工作流程](../images/redux/middle.png)
+
+### 开发 `Redux` 中间件
+
+- 开发中间件的模板代码
+
+```js
+export default (store) => (next) => (action) => {};
+```
+
+### 注册中间件
+
+- 中间件在开发完成以后只有被注册才能在`Redux`的⼯作流程中⽣效
+
+```js
+import { createStore, applyMiddleware } from "redux";
+import logger from "./middlewares/logger";
+
+createStore(reducer, applyMiddleware(logger));
+```
+
+### 中间件开发实例 `thunk`
+
+- `thunk` 中间件可以让我们在 `Redux` 的⼯作流程中加⼊异步代码
+
+```js
+export default ({ dispatch, getState }) => (next) => (action) => {
+  if (typeof action === "function") {
+    return action(dispatch, getState);
+  }
+  next(action);
+};
+```
 
 ## Redux 常用中间件
 
-4
+1. `redux-thunk`**(异步使用)**
+
+   - 引入&&注册&&使用
+
+   ```js
+   //  引入
+   import thunk from "redux-thunk";
+   // 注册
+   import { applyMiddleware } from "redux";
+   createStore(rootReducer, applyMiddleware(thunk));
+   // 使用
+   const loadPosts = () => async (dispatch) => {
+     const posts = await axios.get("/api/posts").then((res) => res.data);
+     dispatch({
+       type: "LOADPOSTSSUCCESS",
+       payload: posts,
+     });
+   };
+   ```
+
+2. `redux-saga`
+
+   - 可以将异步操作从 `Action Creator` ⽂件中抽离出来，放在⼀个单独的⽂件中.
+
+   ```js
+   // 创建
+   import createSagaMiddleware from "redux-saga";
+   const sagaMiddleware = createSagaMiddleware();
+   // 注册
+   createStore(reducer, applyMiddleware(sagaMiddleware));
+   // 使⽤ saga 接收 action 执⾏异步操作
+   import { takeEvery, put } from "redux-sage/effects";
+   function* load_posts() {
+     const { data } = yield axios.get("/api/post.json");
+     yield put(load_posts_success(data));
+   }
+   export default function* postSaga() {
+     yield takeEvery(LOAD_POSTS, load_posts);
+   }
+   // 启动
+   import postSaga from "./store/sagas/post.saga";
+   sageMiddleware.run(postSaga);
+   ```
+
+   - **合并**
+
+   ```js
+   import { all } from "redux-saga/effects";
+   import counterSaga from "./counter.saga";
+   import postSaga from "./post.saga";
+   export default function* rootSaga() {
+     yield all([counterSaga(), postSaga()]);
+   }
+   import rootSaga from "./root.saga";
+   sagaMiddleware.run(rootSaga);
+   ```
+
+3. `redux-actions`
+
+   - `redux`流程中⼤量的样板代码读写很痛苦, 使⽤`redux-actions`可以简化`Action`和`Reducer`的处理.
+
+   ```js
+   // 创建Action
+   import { createAction } from "redux-actions";
+   const increment_action = createAction("increment");
+   const decrement_action = createAction("decrement");
+   // 创建Reducer
+   import { handleActions as createReducer } from "redux-actions";
+   import {
+     increment_action,
+     decrement_action,
+   } from "../actions/counter.action";
+
+   const initialState = { count: 0 };
+   const counterReducer = createReducer(
+     {
+       [increment_action]: (state, action) => ({ count: state.count + 1 }),
+       [decrement_action]: (state, action) => ({ count: state.count - 1 }),
+     },
+     initialState
+   );
+   export default counterReducer;
+   ```
 
 ## Redux 综合案例
-
-5
