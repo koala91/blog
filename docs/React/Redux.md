@@ -20,6 +20,7 @@ Redux 是 JavaScript 状态容器，它提供可预测的状态管理。
 const store = Redux.createStore(reducer);
 // 创建用于处理状态的reducer函数
 function reducer(state = initialState, action) {}
+// store 有三个方法
 // 获取状态
 store.getState();
 // 订阅状态
@@ -328,3 +329,11 @@ export default ({ dispatch, getState }) => (next) => (action) => {
    ```
 
 ## Redux 综合案例
+
+### 精简版本
+
+[精简版本](https://codesandbox.io/s/reduxzui-ji-chu-ban-ben-68uh6?file=/src/App.js:731-736)
+
+### 完整版本
+
+[完整版本](https://codesandbox.io/s/redux-demo-9z094?file=/src/App.js)
