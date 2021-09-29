@@ -17,6 +17,17 @@ module.exports = {
           "/React/Redux",
         ],
       },
+      {
+        title: "Nodejs",
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          "/Nodejs/基础",
+          "/Nodejs/核心模块",
+          "/Nodejs/通信",
+          "/Nodejs/MongoDB",
+        ],
+      },
     ],
   },
   markdown: {
