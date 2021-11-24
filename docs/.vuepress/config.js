@@ -15,6 +15,7 @@ module.exports = {
           "/React/路由",
           "/React/生命周期",
           "/React/Redux",
+          "/React/Hooks",
         ],
       },
       {
