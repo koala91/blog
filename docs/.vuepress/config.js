@@ -5,6 +5,14 @@ module.exports = {
     logo: "/assets/logo.jpg",
     sidebar: [
       {
+        title: "JavaScript 深度解析",
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          "/JS/函数式编程"
+        ]
+      },
+      {
         title: "React",
         collapsable: false,
         sidebarDepth: 1,
